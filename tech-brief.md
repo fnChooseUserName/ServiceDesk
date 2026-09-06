@@ -11,7 +11,7 @@ An internal IT service desk / ticketing system, modeled on real tools like Jira 
 | Layer | Choice | Notes |
 |---|---|---|
 | Backend language/runtime | Java 21 (Eclipse Temurin) | Oracle JDK avoided for this project due to its licensing/update terms; Temurin is fully open-source |
-| Backend framework | Spring Boot 3.x | Two independent services (see §3) |
+| Backend framework | Spring Boot 4.1.x | Two independent services (see §3). Originally scoped as 3.x; updated during S1 scaffolding because Spring Initializr no longer offers a 3.x line. |
 | Build tool | Maven (via `mvnw` wrapper) | Wrapper committed to repo so build tooling is version-locked across machines |
 | Frontend | Angular (latest LTS) | Separate SPA, calls `ticketing-service` REST API |
 | Database | PostgreSQL | Single instance, one schema per service (`ticketing`, `notification`) to preserve service ownership boundaries |

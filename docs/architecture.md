@@ -15,8 +15,8 @@ flowchart TB
     FE[Angular SPA]
 
     subgraph Runtime["Docker Compose / kind / OpenShift"]
-        TS[ticketing-service<br/>Spring Boot 3.x]
-        NS[notification-service<br/>Spring Boot 3.x]
+        TS[ticketing-service<br/>Spring Boot 4.1.x]
+        NS[notification-service<br/>Spring Boot 4.1.x]
         DB[(PostgreSQL<br/>ticketing + notification schemas)]
     end
 
@@ -48,7 +48,7 @@ The frontend does not contain authoritative business rules, persist data, call t
 
 ### `ticketing-service`
 
-This Spring Boot 3.x service is the core domain and application service. It owns:
+This Spring Boot 4.1.x service is the core domain and application service. It owns:
 
 - users and roles;
 - categories;
@@ -65,7 +65,7 @@ For ticket lifecycle events, it calls `notification-service` synchronously over 
 
 ### `notification-service`
 
-This Spring Boot 3.x service owns notification handling. It:
+This Spring Boot 4.1.x service owns notification handling. It:
 
 - accepts ticket lifecycle event requests from `ticketing-service`;
 - determines the notification recipient and message details from the event;
@@ -276,7 +276,7 @@ GitHub Actions is expected to run build/test, OWASP Dependency-Check, SonarQube 
 | Choice | Role and rationale |
 |---|---|
 | Java 21 with Eclipse Temurin | Modern LTS Java runtime with the open-source Temurin distribution selected instead of Oracle JDK licensing/update terms. |
-| Spring Boot 3.x | Provides the REST service and application framework for two small independent Java services. |
+| Spring Boot 4.1.x | Provides the REST service and application framework for two small independent Java services. |
 | Maven wrapper | Makes each service's build tooling reproducible across machines. |
 | Angular latest LTS | A supported SPA framework for the separate presentation layer. |
 | PostgreSQL | Shared database instance with schema-level ownership boundaries suitable for a small local project. |

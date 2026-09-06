@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:notification;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    schemas: notification
+    default-schema: notification
