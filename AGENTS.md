@@ -3,6 +3,11 @@
 ## Project
 This is a small greenfield Zendesk-like ticketing application.
 
+## Tools and frameworks
+- Frontend uses Angular
+- notification-service and ticketing-service are backend services using Java 21 + Spring Boot 4.x
+- infra is a database project targeting postgresql 16
+
 ## Engineering principles
 - Prefer simple solutions over abstractions.
 - Do not introduce infrastructure unless required by the tech brief.

@@ -7,3 +7,15 @@ spring:
   flyway:
     schemas: ticketing
     default-schema: ticketing
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+app:
+  jwt:
+    secret: test-only-jwt-signing-secret-not-for-production-use
+    expiration-minutes: 60
+    issuer: ticketing-service
+  cors:
+    allowed-origin: http://localhost:4200

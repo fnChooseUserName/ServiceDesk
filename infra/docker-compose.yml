@@ -25,6 +25,14 @@ services:
       DB_NAME: servicedesk
       DB_USER: servicedesk
       DB_PASSWORD: servicedesk
+      SPRING_PROFILES_ACTIVE: local
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set (see README.md "Database migrations and seed data")}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-60}
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:4200}
+      SEED_USERS_ENABLED: ${SEED_USERS_ENABLED:-false}
+      SEED_REQUESTER_PASSWORD: ${SEED_REQUESTER_PASSWORD:-}
+      SEED_AGENT_PASSWORD: ${SEED_AGENT_PASSWORD:-}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-}
     ports:
       - "8081:8081"
     depends_on:
