@@ -2,8 +2,8 @@
 
 ## Status
 
-Open questions resolved (see "Decisions made for this slice" and the
-resolutions below). Awaiting final go-ahead. No implementation has started.
+Implemented and verified locally. All acceptance criteria below have been
+checked. Not yet committed — awaiting your go-ahead.
 
 ## Slice recap (from `docs/implementation-plan.md`)
 
@@ -151,21 +151,21 @@ skipped:
 
 ## Acceptance criteria (restated as verifiable checks)
 
-- [ ] `docker-compose up` (from `infra/`) starts three containers:
+- [x] `docker-compose up` (from `infra/`) starts three containers:
       `postgres`, `ticketing-service`, `notification-service`, with no crash
       loops.
-- [ ] `GET http://localhost:8081/actuator/health` returns `200` with
+- [x] `GET http://localhost:8081/actuator/health` returns `200` with
       `{"status":"UP"}`.
-- [ ] `GET http://localhost:8082/actuator/health` returns `200` with
+- [x] `GET http://localhost:8082/actuator/health` returns `200` with
       `{"status":"UP"}`.
-- [ ] `ng serve` (run independently, outside Compose) serves a
+- [x] `ng serve` (run independently, outside Compose) serves a
       blank/minimal Angular shell page at `http://localhost:4200` with no
       console errors.
-- [ ] Postgres contains both `ticketing` and `notification` schemas after
+- [x] Postgres contains both `ticketing` and `notification` schemas after
       startup (verifiable via `psql`/pgAdmin).
-- [ ] `mvnw test` passes for both services; `ng test` passes for the
+- [x] `mvnw test` passes for both services; `ng test` passes for the
       frontend (each run standalone, outside Compose).
-- [ ] No domain tables, business endpoints, or authentication exist yet —
+- [x] No domain tables, business endpoints, or authentication exist yet —
       confirming scope stayed within S1.
 
 ## Explicit non-goals (deferred to later slices)
@@ -193,4 +193,7 @@ skipped:
 
 ## Next step
 
-Plan approved pending final go-ahead to begin implementation.
+Plan approved and implemented. See root `README.md` for how to run the
+stack, and `docs/decisions/0001-migration-tool-flyway.md` and
+`docs/decisions/0002-spring-boot-4-upgrade.md` for decisions made during
+implementation. Awaiting your review before committing.

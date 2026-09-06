@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: servicedesk
+      POSTGRES_PASSWORD: servicedesk
+      POSTGRES_DB: servicedesk
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U servicedesk"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  ticketing-service:
+    build:
+      context: ../ticketing-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: servicedesk
+      DB_USER: servicedesk
+      DB_PASSWORD: servicedesk
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  notification-service:
+    build:
+      context: ../notification-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: servicedesk
+      DB_USER: servicedesk
+      DB_PASSWORD: servicedesk
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
