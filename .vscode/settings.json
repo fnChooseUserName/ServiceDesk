@@ -7,7 +7,7 @@
             "color": "terminal.ansiBlue"
         },
         "infra": {
-            "path": "cmd.exe",
+            "path": "pwsh.exe",
             "cwd": "${workspaceFolder}/infra",
             "icon": "server-environment",
             "color": "terminal.ansiYellow"

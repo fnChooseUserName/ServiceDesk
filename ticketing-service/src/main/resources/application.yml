@@ -8,6 +8,10 @@ spring:
   flyway:
     schemas: ticketing
     default-schema: ticketing
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
 
 server:
   port: 8081
@@ -17,3 +21,11 @@ management:
     web:
       exposure:
         include: health
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:}
+    expiration-minutes: ${JWT_EXPIRATION:60}
+    issuer: ticketing-service
+  cors:
+    allowed-origin: ${FRONTEND_ORIGIN:http://localhost:4200}

@@ -36,7 +36,7 @@
         "presentation": { "reveal": "always", "panel": "dedicated", "focus": false },
         "icon": { "id": "server-environment", "color": "terminal.ansiYellow" },
         "runOptions": { "runOn": "folderOpen" },
-        "windows": { "command": "cmd.exe" },
+        "windows": { "command": "pwsh.exe" },
         "osx": { "command": "zsh" },
         "linux": { "command": "bash" }
     },

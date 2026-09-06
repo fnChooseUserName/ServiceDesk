@@ -2,7 +2,8 @@
 
 ## Status
 
-Proposed. Awaiting approval before implementation.
+Implemented and verified locally. All acceptance criteria below have been
+checked. Not yet committed — awaiting your go-ahead.
 
 ## Slice recap (from `docs/implementation-plan.md`)
 
@@ -286,24 +287,24 @@ No new test framework or external identity service is introduced.
 
 ## Acceptance criteria as verifiable checks
 
-- [ ] With local seeding explicitly enabled, one user exists for each of
+- [x] With local seeding explicitly enabled, one user exists for each of
       `REQUESTER`, `AGENT`, and `ADMIN`, using environment-supplied passwords.
-- [ ] Each seeded user can log in through the SPA and directly through
+- [x] Each seeded user can log in through the SPA and directly through
       `POST /api/auth/login`.
-- [ ] A successful login returns a signed, expiring bearer token and the
+- [x] A successful login returns a signed, expiring bearer token and the
       authenticated user's ID, name, normalized email, and role.
-- [ ] `GET /api/auth/me` returns the identity represented by a valid token
+- [x] `GET /api/auth/me` returns the identity represented by a valid token
       rather than trusting identity or role values sent by the frontend.
-- [ ] An unauthenticated request to `/api/auth/me` returns `401`.
-- [ ] An authenticated user without a required role receives `403` from a
+- [x] An unauthenticated request to `/api/auth/me` returns `401`.
+- [x] An authenticated user without a required role receives `403` from a
       role-protected method, as proven by integration tests.
-- [ ] Missing, malformed, altered, and expired JWTs are rejected.
-- [ ] Stored passwords are BCrypt hashes; plaintext passwords and JWT signing
+- [x] Missing, malformed, altered, and expired JWTs are rejected.
+- [x] Stored passwords are BCrypt hashes; plaintext passwords and JWT signing
       secrets are absent from the repository, API responses, and logs.
-- [ ] The SPA can restore the current identity during the browser session and
+- [x] The SPA can restore the current identity during the browser session and
       removes local auth state on logout or an authentication `401`.
-- [ ] Existing health checks remain publicly accessible.
-- [ ] `mvnw test` passes for `ticketing-service`, and `npm test` passes for
+- [x] Existing health checks remain publicly accessible.
+- [x] `mvnw test` passes for `ticketing-service`, and `npm test` passes for
       the frontend.
 
 ## Explicit non-goals (deferred)

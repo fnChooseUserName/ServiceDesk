@@ -1,0 +1,6 @@
+app:
+  seed:
+    enabled: ${SEED_USERS_ENABLED:false}
+    requester-password: ${SEED_REQUESTER_PASSWORD:}
+    agent-password: ${SEED_AGENT_PASSWORD:}
+    admin-password: ${SEED_ADMIN_PASSWORD:}
