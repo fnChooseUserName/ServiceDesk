@@ -43,6 +43,11 @@ This starts:
 Stop the stack with `docker compose down` (add `-v` to also drop the
 Postgres data volume).
 
+The services continue to write logs to the Compose console, and local profile
+file logs are also written to `infra/logs/ticketing-service/` and
+`infra/logs/notification-service/`. Each service keeps a bounded rolling
+history. Generated log files are ignored by Git.
+
 ### Database migrations and seed data
 
 Each backend service owns its database changes through Flyway migrations
