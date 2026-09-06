@@ -33,6 +33,8 @@ services:
       SEED_REQUESTER_PASSWORD: ${SEED_REQUESTER_PASSWORD:-}
       SEED_AGENT_PASSWORD: ${SEED_AGENT_PASSWORD:-}
       SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-}
+    volumes:
+      - ./logs/ticketing-service:/logs
     ports:
       - "8081:8081"
     depends_on:
@@ -48,6 +50,9 @@ services:
       DB_NAME: servicedesk
       DB_USER: servicedesk
       DB_PASSWORD: servicedesk
+      SPRING_PROFILES_ACTIVE: local
+    volumes:
+      - ./logs/notification-service:/logs
     ports:
       - "8082:8082"
     depends_on:

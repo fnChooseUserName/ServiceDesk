@@ -1,1 +1,4 @@
 .idea/*
+
+# Local Docker service logs
+infra/logs/**/*.log

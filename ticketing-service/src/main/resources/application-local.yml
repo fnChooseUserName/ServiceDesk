@@ -4,3 +4,13 @@ app:
     requester-password: ${SEED_REQUESTER_PASSWORD:}
     agent-password: ${SEED_AGENT_PASSWORD:}
     admin-password: ${SEED_ADMIN_PASSWORD:}
+
+logging:
+  file:
+    name: /logs/ticketing-service.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7
+      total-size-cap: 100MB
+      clean-history-on-start: true
