@@ -1,0 +1,62 @@
+<section>
+  <header>
+    <h2>My tickets</h2>
+    <p>Signed in as {{ auth.currentUser()?.fullName }} ({{ auth.currentUser()?.role }})</p>
+    <button type="button" (click)="logout()">Log out</button>
+  </header>
+
+  <h3>Submit a ticket</h3>
+  <form (ngSubmit)="submit()">
+    <div>
+      <label for="ticket-title">Title</label>
+      <input id="ticket-title" name="title" [(ngModel)]="title" maxlength="200" required />
+    </div>
+    <div>
+      <label for="ticket-description">Description</label>
+      <textarea id="ticket-description" name="description" [(ngModel)]="description" maxlength="5000" required></textarea>
+    </div>
+    <div>
+      <label for="ticket-category">Category</label>
+      <select id="ticket-category" name="categoryId" [(ngModel)]="categoryId" required>
+        @for (category of categories(); track category.id) {
+          <option [value]="category.id">{{ category.name }}</option>
+        }
+      </select>
+    </div>
+    <div>
+      <label for="ticket-priority">Priority</label>
+      <select id="ticket-priority" name="priority" [(ngModel)]="priority">
+        @for (option of priorities; track option) {
+          <option [value]="option">{{ option }}</option>
+        }
+      </select>
+    </div>
+    <button type="submit" [disabled]="submitting()">Submit ticket</button>
+  </form>
+
+  @if (errorMessage()) {
+    <p role="alert">{{ errorMessage() }}</p>
+  }
+
+  <h3>Submitted tickets</h3>
+  @if (tickets().length === 0) {
+    <p>No tickets submitted yet.</p>
+  } @else {
+    <ul>
+      @for (ticket of tickets(); track ticket.id) {
+        <li>
+          <button type="button" (click)="viewTicket(ticket.id)">{{ ticket.title }}</button>
+          — {{ ticket.categoryName }} — {{ ticket.priority }} — {{ ticket.status }}
+        </li>
+      }
+    </ul>
+  }
+
+  @if (selectedTicket(); as ticket) {
+    <article>
+      <h3>{{ ticket.title }}</h3>
+      <p>{{ ticket.description }}</p>
+      <p>{{ ticket.categoryName }} — {{ ticket.priority }} — {{ ticket.status }}</p>
+    </article>
+  }
+</section>
