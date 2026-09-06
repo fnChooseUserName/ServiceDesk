@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "label": "frontend",
+        "type": "shell",
+        "isBackground": true,
+        "problemMatcher": [],
+        "options": { "cwd": "${workspaceFolder}/frontend" },
+        "presentation": { "reveal": "always", "panel": "dedicated", "focus": false },
+        "icon": { "id": "globe", "color": "terminal.ansiBlue" },
+        "runOptions": { "runOn": "folderOpen" },
+        "windows": { "command": "cmd.exe" },
+        "osx": { "command": "zsh" },
+        "linux": { "command": "bash" }
+    },
+    {
+        "label": "git",
+        "type": "shell",
+        "isBackground": true,
+        "problemMatcher": [],
+        "options": { "cwd": "${workspaceFolder}" },
+        "presentation": { "reveal": "always", "panel": "dedicated", "focus": false },
+        "icon": { "id": "source-control", "color": "terminal.ansiRed" },
+        "runOptions": { "runOn": "folderOpen" },
+        "windows": { "command": "${env:ProgramFiles}\\Git\\bin\\bash.exe" },
+        "osx": { "command": "zsh" },
+        "linux": { "command": "bash" }
+    },
+    {
+        "label": "infra",
+        "type": "shell",
+        "isBackground": true,
+        "problemMatcher": [],
+        "options": { "cwd": "${workspaceFolder}/infra" },
+        "presentation": { "reveal": "always", "panel": "dedicated", "focus": false },
+        "icon": { "id": "server-environment", "color": "terminal.ansiYellow" },
+        "runOptions": { "runOn": "folderOpen" },
+        "windows": { "command": "cmd.exe" },
+        "osx": { "command": "zsh" },
+        "linux": { "command": "bash" }
+    },
+    {
+        "label": "notifications",
+        "type": "shell",
+        "isBackground": true,
+        "problemMatcher": [],
+        "options": { "cwd": "${workspaceFolder}/notification-service" },
+        "presentation": { "reveal": "always", "panel": "dedicated", "focus": false },
+        "icon": { "id": "beaker", "color": "terminal.ansiMagenta" },
+        "runOptions": { "runOn": "folderOpen" },
+        "windows": { "command": "cmd.exe" },
+        "osx": { "command": "zsh" },
+        "linux": { "command": "bash" }
+    },
+    {
+        "label": "ticketing",
+        "type": "shell",
+        "isBackground": true,
+        "problemMatcher": [],
+        "options": { "cwd": "${workspaceFolder}/ticketing-service" },
+        "presentation": { "reveal": "always", "panel": "dedicated", "focus": false },
+        "icon": { "id": "beaker", "color": "terminal.ansiCyan" },
+        "runOptions": { "runOn": "folderOpen" },
+        "windows": { "command": "cmd.exe" },
+        "osx": { "command": "zsh" },
+        "linux": { "command": "bash" }
+    },
+  ]
+}

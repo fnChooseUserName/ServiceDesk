@@ -1,0 +1,99 @@
+{
+    "terminal.integrated.profiles.windows": {
+        "frontend": {
+            "path": "cmd.exe",
+            "cwd": "${workspaceFolder}/frontend",
+            "icon": "globe",
+            "color": "terminal.ansiBlue"
+        },
+        "infra": {
+            "path": "cmd.exe",
+            "cwd": "${workspaceFolder}/infra",
+            "icon": "server-environment",
+            "color": "terminal.ansiYellow"
+        },
+        "notifications": {
+            "path": "cmd.exe",
+            "cwd": "${workspaceFolder}/notification-service",
+            "icon": "beaker",
+            "color": "terminal.ansiMagenta"
+        },
+        "ticketing": {
+            "path": "cmd.exe",
+            "cwd": "${workspaceFolder}/ticketing-service",
+            "icon": "beaker",
+            "color": "terminal.ansiCyan"
+        },
+        "git": {
+            "source": "Git Bash",
+            "cwd": "${workspaceFolder}",
+            "icon": "source-control",
+            "color": "terminal.ansiRed"
+        }
+    },
+    "terminal.integrated.profiles.osx": {
+        "frontend": {
+            "path": "zsh",
+            "cwd": "${workspaceFolder}/frontend",
+            "icon": "globe",
+            "color": "terminal.ansiBlue"
+        },
+        "infra": {
+            "path": "zsh",
+            "cwd": "${workspaceFolder}/infra",
+            "icon": "server-environment",
+            "color": "terminal.ansiYellow"
+        },
+        "notifications": {
+            "path": "zsh",
+            "cwd": "${workspaceFolder}/notification-service",
+            "icon": "beaker",
+            "color": "terminal.ansiMagenta"
+        },
+        "ticketing": {
+            "path": "zsh",
+            "cwd": "${workspaceFolder}/ticketing-service",
+            "icon": "beaker",
+            "color": "terminal.ansiCyan"
+        },
+        "git": {
+            "path": "zsh",
+            "cwd": "${workspaceFolder}",
+            "icon": "source-control",
+            "color": "terminal.ansiRed"
+        }
+    },
+    "terminal.integrated.profiles.linux": {
+        "frontend": {
+            "path": "bash",
+            "cwd": "${workspaceFolder}/frontend",
+            "icon": "globe",
+            "color": "terminal.ansiBlue"
+        },
+        "infra": {
+            "path": "bash",
+            "cwd": "${workspaceFolder}/infra",
+            "icon": "server-environment",
+            "color": "terminal.ansiYellow"
+        },
+        "notifications": {
+            "path": "bash",
+            "cwd": "${workspaceFolder}/notification-service",
+            "icon": "beaker",
+            "color": "terminal.ansiMagenta"
+        },
+        "ticketing": {
+            "path": "bash",
+            "cwd": "${workspaceFolder}/ticketing-service",
+            "icon": "beaker",
+            "color": "terminal.ansiCyan"
+        },
+        "git": {
+            "path": "bash",
+            "cwd": "${workspaceFolder}",
+            "icon": "source-control",
+            "color": "terminal.ansiRed"
+        }
+    },
+    "terminal.integrated.enablePersistentSessions": true
+}
