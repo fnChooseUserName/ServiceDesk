@@ -1,0 +1,17 @@
+<section>
+  <h2>Sign in</h2>
+  <form (ngSubmit)="login()">
+    <div>
+      <label for="login-email">Email</label>
+      <input id="login-email" name="email" type="email" [(ngModel)]="email" required />
+    </div>
+    <div>
+      <label for="login-password">Password</label>
+      <input id="login-password" name="password" type="password" [(ngModel)]="password" required />
+    </div>
+    <button type="submit" [disabled]="submitting()">Log in</button>
+    @if (errorMessage()) {
+      <p role="alert">{{ errorMessage() }}</p>
+    }
+  </form>
+</section>

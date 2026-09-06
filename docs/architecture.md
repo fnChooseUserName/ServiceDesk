@@ -170,6 +170,14 @@ Each service may read and write only its own schema. The `notification` schema c
 
 The domain model requires transactional consistency inside `ticketing-service` for a status transition, its history row, and the denormalized reopen/resolution fields. The brief does not yet define the durability or retry mechanism that should bridge a committed ticket transaction and a notification request.
 
+Domain tables may be introduced incrementally by vertical slice. When a slice
+intentionally omits later fields or related tables, the later slice must add
+them through a new forward-only Flyway migration; an applied migration must
+not be edited retroactively. In particular, S3 ticket creation does not
+include `TicketStatusHistory` or calculated `slaDueAt`; S6 must add the
+history schema before transition auditing, and S8 must add the SLA field(s)
+before SLA calculation/display.
+
 Database schema changes must be versioned with the service and reproducible in local containers and Kubernetes/OpenShift deployments. The specific migration library is not selected in the brief and should not be assumed here.
 
 ## API and application boundaries
@@ -215,7 +223,7 @@ Whichever mechanism is selected must enforce authorization in `ticketing-service
 - agents performing triage, assignment, and resolution operations;
 - administrators performing administrative operations such as the rare closed-ticket reopen.
 
-Internal comments must be filtered by the backend according to the caller's authorization. Angular route guards may improve user experience but cannot replace backend enforcement.
+Internal comments must be filtered by the backend according to the caller's authorization. Angular route guards may improve user experience and route navigation, but cannot replace backend enforcement. S3 introduces only minimal client navigation; all ticket API authorization remains in `ticketing-service`.
 
 The notification service receives recipient addresses as part of the event contract; it is not the owner of user identity or roles.
 
@@ -299,4 +307,3 @@ The following items must be resolved before the affected implementation is final
 5. **Scheduled-job scaling:** decide how SLA polling is made single-effective when `ticketing-service` has multiple replicas, or explicitly constrain the MVP deployment to one replica.
 6. **Event idempotency:** define a stable event identifier or deduplication rule so retries cannot create duplicate notifications.
 7. **REST contracts:** define endpoint paths, request/response DTOs, validation rules, error shapes, and compatibility/versioning expectations for both REST boundaries.
-
