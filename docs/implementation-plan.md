@@ -36,9 +36,9 @@ and a reporting/analytics dashboard. These are not planned as slices.
 ### S3 — Ticket submission
 - **Objective:** A requester can submit a ticket and see it recorded — the first slice that produces real domain value.
 - **Dependencies:** S1, S2.
-- **Scope:** `Ticket` and `Category` persistence (categories seeded, not yet admin-managed), ticket-creation REST endpoint, minimal SPA form to submit a ticket and view its own submitted tickets.
-- **Acceptance criteria:** A logged-in requester creates a ticket with title/description/category/priority; it is persisted with status `NEW`; the requester can retrieve/view it; a requester cannot view another requester's tickets.
-- **Risks/unknowns:** `slaDueAt` and `TicketStatusHistory`'s initial row are deferred to S8/S6 respectively — confirm a null/placeholder SLA value at creation doesn't need to be exposed to the frontend yet.
+- **Scope:** `Ticket` and `Category` persistence (categories seeded, not yet admin-managed), ticket-creation REST endpoint, minimal routed SPA flow (`/login` and `/tickets`) for submitting a ticket and viewing the requester's own submitted tickets.
+- **Acceptance criteria:** A logged-in requester creates a ticket with title/description/category/priority; it is persisted with status `NEW`; the requester can retrieve/view it; a requester cannot view another requester's tickets; the SPA provides navigable login and ticket pages with a root redirect while backend authorization remains authoritative.
+- **Risks/unknowns:** `slaDueAt` and `TicketStatusHistory` are intentionally absent from the S3 schema/write path. S8 and S6 must introduce them through new forward-only Flyway migrations (without editing the S3 migration), and the frontend must not assume those fields exist until those slices land.
 
 ### S4 — Category management (admin)
 - **Objective:** An admin can manage the categories used by ticket submission, replacing the fixed seed data from S3.
@@ -57,7 +57,7 @@ and a reporting/analytics dashboard. These are not planned as slices.
 ### S6 — Ticket resolution workflow
 - **Objective:** An agent can progress a ticket through the remaining lifecycle states to resolution and closure, with every transition enforced and audited.
 - **Dependencies:** S5.
-- **Scope:** `OPEN → IN_PROGRESS → ON_HOLD ⇄ IN_PROGRESS → RESOLVED → CLOSED` transitions, rejection of invalid transitions, `RESOLVED → OPEN` (requester rejects resolution), `TicketStatusHistory` row per transition, `firstResolvedAt` set once on first `RESOLVED`.
+- **Scope:** Add the status-history schema through a new forward-only Flyway migration, then implement `OPEN → IN_PROGRESS → ON_HOLD ⇄ IN_PROGRESS → RESOLVED → CLOSED` transitions, rejection of invalid transitions, `RESOLVED → OPEN` (requester rejects resolution), `TicketStatusHistory` row per transition, and `firstResolvedAt` set once on first `RESOLVED`.
 - **Acceptance criteria:** Each documented transition succeeds and is recorded; an undocumented transition (e.g., `NEW → CLOSED`) is rejected; `firstResolvedAt` does not change on a second resolution after a reopen.
 - **Risks/unknowns:** None new — this is the core state-machine slice the brief already specifies precisely.
 
@@ -71,7 +71,7 @@ and a reporting/analytics dashboard. These are not planned as slices.
 ### S8 — SLA calculation & display
 - **Objective:** Every ticket shows a real due date so SLA adherence becomes visible and measurable.
 - **Dependencies:** S3, S4.
-- **Scope:** `slaDueAt` computation at ticket creation from priority and/or category, surfaced on ticket detail/list views.
+- **Scope:** Add the SLA field(s) through a new forward-only Flyway migration, compute `slaDueAt` at ticket creation from priority and/or category, and surface it on ticket detail/list views.
 - **Acceptance criteria:** A newly created ticket has a computed `slaDueAt` consistent with the documented priority windows (or category override, per the decision made here); the value is visible in the SPA.
 - **Risks/unknowns:** Precedence between `Category.defaultSlaHours` and the priority table is explicitly unresolved (architecture doc, unresolved decision #4) and must be decided as part of this slice.
 
