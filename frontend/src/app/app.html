@@ -1,7 +1,30 @@
 <!--
-  S1 scaffolding placeholder. Ticket/agent workflows are added in later
-  implementation-plan slices (see docs/implementation-plan.md).
+  Ticket/agent workflows are added in later implementation-plan slices
+  (see docs/implementation-plan.md). This slice (S2) only adds login and
+  identity display.
 -->
 <main>
   <h1>Service Desk</h1>
+
+  @if (auth.currentUser(); as user) {
+    <section>
+      <p>Signed in as {{ user.fullName }} ({{ user.role }})</p>
+      <button type="button" (click)="logout()">Log out</button>
+    </section>
+  } @else {
+    <form (ngSubmit)="login()">
+      <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" [(ngModel)]="email" required />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" [(ngModel)]="password" required />
+      </div>
+      <button type="submit" [disabled]="submitting()">Log in</button>
+      @if (errorMessage()) {
+        <p role="alert">{{ errorMessage() }}</p>
+      }
+    </form>
+  }
 </main>
