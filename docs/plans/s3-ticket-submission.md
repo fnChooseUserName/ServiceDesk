@@ -2,7 +2,8 @@
 
 ## Status
 
-Proposed. Awaiting approval before implementation.
+Implemented. Focused automated tests pass; manual functional verification is
+pending. Not yet committed — awaiting your review.
 
 ## Slice recap (from `docs/implementation-plan.md`)
 
@@ -243,12 +244,13 @@ frontend/
     app.routes.ts
     auth/
       auth.guard.ts
+      login-page.ts
+      login-page.html
     tickets/
       ticket.models.ts
       ticket.service.ts
       tickets-page.ts
       tickets-page.html
-      tickets-page.spec.ts
       ticket.service.spec.ts
 ```
 
@@ -276,9 +278,10 @@ existing `auth` and `user` packages.
    the ticket page. Add ticket models/service, load categories for
    authenticated requesters, add the submission form, reload the own-ticket
    list after a successful creation, and provide a minimal detail display.
-7. **Verify the vertical slice:** run backend/frontend tests and a local
-   Compose smoke test proving a requester can create/read their ticket while a
-   second requester cannot retrieve it.
+7. **Verify the vertical slice:** run the focused backend/frontend tests. A
+   local Compose smoke test proving a requester can create/read their ticket
+   while a second requester cannot retrieve it remains a manual verification
+   step.
 
 ## Automated tests
 
